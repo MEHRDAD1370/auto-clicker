@@ -1,67 +1,47 @@
 ```yaml
-name: Build AutoClicker APK
+name: Android APK Build
 
-on:
+'on':
+  workflow_dispatch:
   push:
     branches:
       - main
       - master
-  workflow_dispatch:
-
-permissions:
-  contents: read
 
 jobs:
   build:
-    name: Build APK
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up JDK
+      - name: Install Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
 
-      - name: Set up Android SDK
+      - name: Install Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Install Android packages
-        shell: bash
+      - name: Install SDK packages
         run: |
-          SDKMANAGER="$(find "$ANDROID_HOME/cmdline-tools" -type f -name sdkmanager 2>/dev/null | head -n 1)"
-
+          SDKMANAGER=$(find "$ANDROID_HOME/cmdline-tools" -type f -name sdkmanager 2>/dev/null | head -n 1)
           if [ -z "$SDKMANAGER" ]; then
-            echo "ERROR: sdkmanager not found"
+            echo "sdkmanager not found"
             exit 1
           fi
-
           yes | "$SDKMANAGER" --licenses || true
           "$SDKMANAGER" "platform-tools" "platforms;android-35" "build-tools;35.0.0"
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Check Gradle wrapper
-        shell: bash
+      - name: Build APK
         run: |
-          if [ ! -f gradlew ]; then
-            echo "ERROR: gradlew is missing"
-            exit 1
-          fi
-
           chmod +x gradlew
-
-          if [ ! -f gradle/wrapper/gradle-wrapper.jar ]; then
-            echo "ERROR: gradle-wrapper.jar is missing"
-            exit 1
-          fi
-
-      - name: Build debug APK
-        run: ./gradlew assembleDebug --stacktrace
+          ./gradlew assembleDebug --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
