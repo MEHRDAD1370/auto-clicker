@@ -29,10 +29,24 @@ jobs:
           gradle-version: "8.9"
 
       - name: Set up Android SDK
-        env:
-          ANDROID_HOME: /usr/local/lib/android/sdk
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK packages
         run: |
-          SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          SDKMANAGER="${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager"
+
+          if [ ! -x "$SDKMANAGER" ]; then
+            SDKMANAGER="$(find "${ANDROID_HOME}/cmdline-tools" -type f -name sdkmanager 2>/dev/null | head -n 1)"
+          fi
+
+          if [ -z "$SDKMANAGER" ] || [ ! -x "$SDKMANAGER" ]; then
+            echo "ERROR: sdkmanager not found"
+            echo "ANDROID_HOME=${ANDROID_HOME}"
+            find "${ANDROID_HOME}/cmdline-tools" -maxdepth 4 -type f -name sdkmanager 2>/dev/null || true
+            exit 1
+          fi
+
+          echo "Using sdkmanager: $SDKMANAGER"
           yes | "$SDKMANAGER" --licenses
           "$SDKMANAGER" "platform-tools" "platforms;android-35" "build-tools;35.0.0"
 
