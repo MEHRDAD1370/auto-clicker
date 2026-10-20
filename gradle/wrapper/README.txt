@@ -1,0 +1,1 @@
+This project pins Gradle 8.9 in gradle-wrapper.properties. GitHub Actions installs Gradle 8.9 directly, so no wrapper JAR is needed in CI. For a conventional self-contained Gradle Wrapper, run `gradle wrapper --gradle-version 8.9` locally and commit gradle/wrapper/gradle-wrapper.jar plus the generated scripts.

@@ -1,0 +1,196 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#F5F7FB">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+        <TextView
+            android:id="@+id/brandingText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Powered by Mehrdad R"
+            android:textColor="#246BFD"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="end"
+            android:layout_marginBottom="8dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Auto Clicker"
+            android:textColor="#182230"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="مختصات، زمان شروع و تعداد کلیک را تنظیم کن."
+            android:textColor="#667085"
+            android:textSize="14sp" />
+        <Button
+            android:id="@+id/accessibilityButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="فعال‌کردن سرویس Accessibility" />
+        <Button
+            android:id="@+id/overlayButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="انتخاب نقطه با نشانگر شناور" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="مختصات صفحه (پیکسل)"
+            android:textStyle="bold"
+            android:textColor="#344054" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/xInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="X"
+                android:inputType="numberSigned"
+                android:text="540" />
+            <EditText
+                android:id="@+id/yInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="12dp"
+                android:hint="Y"
+                android:inputType="numberSigned"
+                android:text="960" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="شروع اجرا"
+            android:textStyle="bold"
+            android:textColor="#344054" />
+        <RadioGroup
+            android:id="@+id/startModeGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/startNow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="بلافاصله پس از زدن شروع" />
+            <RadioButton
+                android:id="@+id/startAfter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="پس از تأخیر (ثانیه)" />
+            <RadioButton
+                android:id="@+id/startAtTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="در ساعت مشخص (HH:mm)" />
+        </RadioGroup>
+        <EditText
+            android:id="@+id/startDelayInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="تأخیر ثانیه‌ای (مثلاً 10)"
+            android:inputType="number"
+            android:text="10" />
+        <EditText
+            android:id="@+id/startTimeInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ساعت شروع، مثل 21:30"
+            android:inputType="time"
+            android:text="21:30" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="همگام‌سازی ساعت با سایت (اختیاری)"
+            android:textStyle="bold"
+            android:textColor="#344054" />
+        <EditText
+            android:id="@+id/timeUrlInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="https://example.com"
+            android:inputType="textUri"
+            android:singleLine="true" />
+        <Button
+            android:id="@+id/syncTimeButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="دریافت ساعت از سایت" />
+        <TextView
+            android:id="@+id/timeSyncStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="در صورت پشتیبانی سایت، زمان از هدر HTTP Date خوانده می‌شود."
+            android:textColor="#667085"
+            android:textSize="12sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="فاصله بین کلیک‌ها (میلی‌ثانیه)"
+            android:textStyle="bold"
+            android:textColor="#344054" />
+        <EditText
+            android:id="@+id/intervalInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:text="100" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="تعداد کلیک‌ها"
+            android:textStyle="bold"
+            android:textColor="#344054" />
+        <EditText
+            android:id="@+id/countInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:text="500" />
+        <TextView
+            android:id="@+id/statusText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="آماده"
+            android:textColor="#344054"
+            android:textSize="16sp" />
+        <Button
+            android:id="@+id/startButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="شروع کلیک‌ها" />
+        <Button
+            android:id="@+id/stopButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="توقف اضطراری" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="توجه: اجرای کلیک نیازمند فعال‌سازی دستی سرویس Accessibility است. برای استفاده مسئولانه و مطابق قوانین برنامه مقصد استفاده کن."
+            android:textColor="#667085"
+            android:textSize="12sp" />
+    </LinearLayout>
+</ScrollView>

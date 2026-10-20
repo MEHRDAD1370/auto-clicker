@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Auto Clicker</string>
+    <string name="accessibility_description">Performs user-configured taps at a selected screen coordinate. Enable only when you intend to use Auto Clicker.</string>
+</resources>
