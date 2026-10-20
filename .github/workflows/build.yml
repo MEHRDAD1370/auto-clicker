@@ -57,6 +57,7 @@ jobs:
             "build-tools;35.0.0"
 
       
+     
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
@@ -70,6 +71,12 @@ jobs:
           fi
 
           chmod +x gradlew
+
+          test -f gradle/wrapper/gradle-wrapper.jar || {
+            echo "ERROR: Could not generate gradle-wrapper.jar"
+            exit 1
+          }
+
 
           test -f gradle/wrapper/gradle-wrapper.jar || {
             echo "ERROR: Could not generate gradle-wrapper.jar"
