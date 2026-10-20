@@ -56,23 +56,26 @@ jobs:
             "platforms;android-35" \
             "build-tools;35.0.0"
 
+      
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
 
-      - name: Check Gradle wrapper
+      - name: Generate missing Gradle Wrapper
         shell: bash
         run: |
-          test -f gradlew || {
-            echo "ERROR: gradlew is missing"
-            exit 1
-          }
-
-          test -f gradle/wrapper/gradle-wrapper.jar || {
-            echo "ERROR: gradle-wrapper.jar is missing"
-            exit 1
-          }
+          if [ ! -f gradlew ] || [ ! -f gradle/wrapper/gradle-wrapper.jar ]; then
+            gradle wrapper --gradle-version 8.9
+          fi
 
           chmod +x gradlew
+
+          test -f gradle/wrapper/gradle-wrapper.jar || {
+            echo "ERROR: Could not generate gradle-wrapper.jar"
+            exit 1
+          }
+
 
       - name: Build APK
         run: ./gradlew assembleDebug --stacktrace
